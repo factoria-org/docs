@@ -627,18 +627,8 @@ Just go to a collection dashboard, and click the "Withdraw" button. The button s
 
 ## 9. build your own vending machine
 
-See [developers](#developers)
-
-## 10. build your own storefront
-
-See [developers](#developers)
+See [developers documentation](https://dev.factoria.app)
 
 
----
-
-
-# developers
-
-SOON
 
 ---
