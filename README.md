@@ -627,7 +627,7 @@ Just go to a collection dashboard, and click the "Withdraw" button. The button s
 
 ## 9. build your own vending machine
 
-See [developers documentation](https://dev.factoria.app)
+See [developers documentation](https://dev.factoria.app/f0)
 
 
 
