@@ -625,10 +625,121 @@ Just go to a collection dashboard, and click the "Withdraw" button. The button s
 
 
 
-## 9. build your own vending machine
+## 10. build your own vending machine
 
-See [developers documentation](https://dev.factoria.app/f0)
+You can set up your own vending machine website simply by cloning a git repository.
+
+Check out Skinnerbox, a minimal vending machine for F0: https://github.com/factoria-org/skinnerbox
+
+## 11. set up royalty
+
+There are 2 ways to set up royalty (and you need to do both if you want to support royalty everywhere).
+
+1. **manually setting royalty:** manually set royalty rate for your contract on NFT marketplaces.
+2. **automatically setting royalty:** declare the royalty settings directly on the contract, following the [NFT royalty standard (EIP-2981)](https://eips.ethereum.org/EIPS/eip-2981).
 
 
+### A. Manually Set Royalty
+
+Some marketplaces (such as Opensea and Rarible) let you set the contract-wide royalty through their web UI.
+
+![manualroyalty.gif](manualroyalty.gif)
+
+
+### B. Automatically Set Royalty
+
+More and more NFT marketplaces (such as Looksrare) are starting to support the EIP-2981 NFT royalty standard (learn more here: https://eips.ethereum.org/EIPS/eip-2981), which lets you declare royalty settings directly on the contract. By declaring the royalty on the contract, you do not need to manually set the royalty for every marketplace out there. (At least that's the theory).
+
+The F0 contract supports a plug-and-play interface for royalty logic. 
+
+![automaticroyalty.gif](automaticroyalty.gif)
+
+1. Go to the "royalty" tab and select a contract you wish to update.
+2. Click "edit" to go to the royalty edit page.
+3. Enter the royalty percentage (out of 100) and the royalty receiver address.
+
+The first time you set the royalty, you will need to make 2 transactions:
+
+1. Setting the royalty ratio on the royalty contract
+2. Connecting the royalty contract with your NFT contract
+
+But from the second time, you will only need to make the first transaction ("setting the royalty ratio").
+
+Also, you can make the royalty ratio permanent by selecting the "permanent" checkbox. Once you update with a "permanent" option, you won't be able to edit the royalty ratio. Your minters may want the royalty ratio to be permanent so it is recommended that you make the ratio permanent before launching.
+
+> Note that you still need to manually set the royalty on some marketplaces like Opensea and Rarible. We hope that all the NFT marketplaces will eventually adopt the standard so we don't have to manually go around setting royalties, but for now we need to do both the "manual" and the "automatic" approaches to cover all cases.
+
+
+## 12. build customized apps
+
+To directly use Web3 and IPFS to build your own web app around your NFT collection, see [developers documentation](https://dev.factoria.app/f0)
+
+To use a JavaScript library that abstracts all the complicated details of working with Web3 and IPFS, see [F0.JS](https://f0js.factoria.app/#/)
+
+
+## 13. splitting minting revenue
+
+Have collaborators and want to automatically split revenue among the members? 
+
+Factoria makes this simple too. You just need to create a group address that represents all the members, and set that address as the "withdrawer". Then the revenue will be automatically split and shared among the collaborators.
+
+![moneypipe.png](moneypipe.png)
+
+There are two ways to split revenue:
+
+1. The owner withdraws directly to members' addresses
+2. The owner withdraws to a group address, and the members can withdraw from the group address
+
+> You can learn more about how Moneypipe works here: https://moneypipe.xyz
+
+Let's take a look at how Moneypipe can be incorporated into the Factoria workflow:
+
+### A. Withdraw directly to the members
+
+You can use [Moneypipe Stream](https://stream.moneypipe.xyz) to achieve this.
+
+With this approach, when the contract owner withdraws money from the contract, the revenue gets split and sent to all members in realtime. Convenient, but becomes expensive to withdraw when there are many members in the group.
+
+![stream.gif](stream.gif)
+
+Here's how to do this with Factoria:
+
+1. The owner creates a group with a "stream" mode, made up of the collaborators' addresses
+2. The owner goes to the admin page of the Factoria collection and sets the group address as the collection's "withdrawer"
+3. Later when it's time to withdraw the revenue, the owner goes to the admin page and click "withdraw" to withdraw the revenue. The funds will be automatically split and sent to the members in the same transaction.
+
+### B. Allow members to withdraw
+
+You can use [Moneypipe Buffer](https://buffer.moneypipe.xyz) to achieve this.
+
+Instead of withdrawing directly to all the members, the contract owner withdraws funds to a group address. Each member can then withdraw their share from the group address. Requires an additional "withdrawal" step for each member, but the withdrawal cost is cheap and fixed regardless of how many members there are.
+
+![buffer.gif](buffer.gif)
+
+Here's how to do this with Factoria:
+
+1. The owner creates a group with a "buffer" mode, made up of the collaborators' addresses
+2. The owner goes to the admin page of the Factoria collection and sets the group address as the collection's "withdrawer"
+3. Later when it's time to withdraw the revenue, the owner goes to the admin page and clicks "withdraw" to withdraw the revenue. This time, the funds will be sent to the group address (Not directly to the members' addresses).
+4. Each member can go to the admin page to find the URL for the Moneypipe Buffer landing page.
+5. The members can then visit the Moneypipe buffer landing page and claim their share of the revenue.
+
+## 14. splitting royalty revenue
+
+This works the same as spliting the revenue for initial minting.
+
+1. Set up the revenue split as explained in the previous section.
+2. Go to various NFT marketplaces and set your **F0 contract address** as the sole royalty receiver address.
+3. Once that's finished your contract will collect not only the minting revenue but ALSO the royalty revenue from the marketplaces.
+4. Now ALL of your revenues are stored in the same pot (in the contract), so all you need to do as the owner is withdraw, and everyone will get their shares of the revenue (both the minting revenue and the royalty revenue)
+
+Because royalties are enforced by the NFT marketplaces that list NFTs, you need to set the royalty recipient address from all NFT marketplaces. You can learn more about this here:
+
+- **Opensea:** https://docs.opensea.io/docs/10-setting-fees-on-secondary-sales
+- **Rarible:** https://rarible.medium.com/list-your-collection-on-rarible-com-for-secondary-sales-with-multiple-royalties-512cf4221f6 (The article explains how to split royalties directly from Rarible, but we recommend NOT doing that and instead collecting all revenue to the contract, and then splitting when withdrawing from the contract. That way it works exactly the same for all marketplaces)
+- **Royalty Registry:** Because it is inconvenient to deal with royalties across various NFT marketplaces, a project was built to set the royalty once and apply it everywhere. You can use Royalty registry to set the royalty (not supported for Opensea so you still need to set it on Opensea additionally), where you set the contract address as the royalty recipient, and split when the owner withdraws from the contract.
+
+If you have questions, please join [Discord](https://discord.gg/BZtp5F6QQM) and ask. Also make sure to test these on testnet Factoria before doing on mainnet.
 
 ---
+
