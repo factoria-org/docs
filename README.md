@@ -743,3 +743,26 @@ If you have questions, please join [Discord](https://discord.gg/BZtp5F6QQM) and 
 
 ---
 
+# FAQ
+
+## How much does it cost?
+
+This is a 2 part question:
+
+1. How much is the gas fee?
+2. How much does Factoria charge for the usage?
+
+### How much is the gas fee?
+
+The F0 contract is extremely optimized, and is one of the cheapest option to launch your own NFT collection. You can check out the realtime gas estimate here: https://factoria.app/about
+
+### How much does Factoria charge for the usage?
+
+- **100% FREE to get started:** No upfront fee to launch. The top priority of Factoria is to help lower the barrier to launching NFT collections as much as possible. That's why you pay nothing (except for the gas fee) when deploying your contract.
+- **Pay only when you make money:** The only fee payment happens when your contract generates revenue. If you don't generate any revenue from the contract, you pay nothing. For example, if your NFT collection had a special business model where everyone mints for free, you will end up paying ZERO fee to Factoria.
+  - **1% of Total Revenue:** ONLY when you generate revenue, and only when you withdraw from the contract, Factoria charges you 1% of the total revenue.
+  - **1 ETH Maximum:** Even the 1% fee is capped at 1ETH. The maximum you will ever pay in fee for a collection is 1ETH, regardless of how much revenue you generate. If you make 100ETH with your collection, the Factoria fee will be 1ETH. Also, if you make 1000ETH with your collection, your fee will still be 1ETH.
+- **NO maintenance cost:** There is no "monthly subscription" fee or any service fee. Once you launch your NFT contract, it's completely yours and you do NOT need to rely on any 3rd party, because Factoria has been architected to get rid of 3rd parties. Everything takes place inside your browser before publishing, and everything loads straight from IPFS and Ethereum once you publish. There is no server, so there is no maintenance cost, which is why there is no hidden fee and Factoria can provide all the value without charging a lot of money, forever.
+- **100% automated and transparent:** The fee logic is transparently built-in to the contract and all the fee calculation and payment happens automatically when you withdraw revenue from the contract. You can check here: https://github.com/factoria-org/f0/blob/main/contracts/F0.sol#L132-L175
+
+---
