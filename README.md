@@ -50,7 +50,7 @@ Get an account on [Pinata](https://www.pinata.cloud/) if you haven't yet.
 
 ![creatingacontract.gif](creatingacontract.gif)
 
-Go to the [Contract tab](https://rinkeby2.factoria.app/contract/) and click "Create". Here you can customize and deploy your contract.
+Go to the [Contract tab](https://rinkeby.factoria.app/f0-v2/contract) and click "Create". Here you can customize and deploy your contract.
 
 If you are not sure what to fill out, just fill out the **name** and **symbol**. The rest of the attributes (**placeholder uri**, **supply**, **base uri**) can be left empty because they can be configured later (through an additional transaction).
 
@@ -72,7 +72,7 @@ Deploying a collection doesn't mean anyone can immediately start minting from it
 Let's start the rollout with an "airdrop" option. Basically you're going to let a couple of selected addresses to **mint for free (0 ETH)**, which includes yourself.
 
 
-1. Go to the [Invite tab](https://rinkeby2.factoria.app/invites/)
+1. Go to the [Invite tab](https://rinkeby.factoria.app/f0-v2/invites/)
 2. Paste in some addresses (Include your own Ethereum address, so you can try for yourself!)
 3. Click "Create on IPFS" and enter the Pinata API key and secret. It will generate an invite merkle tree and save it on IPFS.
 4. Click "Connect to an NFT collection", it will display all your collections.
